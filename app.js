@@ -4,11 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var dotenv = require('dotenv');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var todos = require('./routes/todos');
-
+dotenv.config();
 // load mongoose package
 var mongoose = require('mongoose');
 
@@ -16,7 +16,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 // connect to MongoDB
-mongoose.connect('mongodb://localhost/todo-api')
+mongoose.connect(process.env.MONGO_URL)
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
